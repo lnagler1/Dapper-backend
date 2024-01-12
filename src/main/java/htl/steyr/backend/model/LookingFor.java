@@ -18,5 +18,5 @@ public class LookingFor {
     private String description;
 
     @OneToMany(mappedBy = "lookingFor")
-    private List<User> user;
+    private List<User> users;
 }

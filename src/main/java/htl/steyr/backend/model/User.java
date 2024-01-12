@@ -10,27 +10,63 @@ import java.util.List;
 @Table(name = "user")
 @Getter
 @Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    @NonNull
     private int height;
+
+    @Column
+    @NonNull
     private String email;
+
+    @Column
+    @NonNull
     private String password;
+
+    @Column
+    @NonNull
     private boolean terms;
+
+    @Column
+    @NonNull
     private Date birthday;
+
+    @Column
+    @NonNull
     private int age;
-    private String firstname;
-    private String lastname;
+
+    @Column
+    @NonNull
     private String username;
+
+    @Column
+    @NonNull
     private String nickname;
+
+    @Column
+    @NonNull
     private String snapchat;
+
+    @Column
     private String instagram;
+
+    @Column
     private String tiktok;
+
+    @Column
     private String quote;
+
+    @Column
     private String bio;
+
+    @Column
     private int dapCoin;
 
     // LookingFor ( the things the user is looking for in a Relationship ) of the user
@@ -41,16 +77,19 @@ public class User {
     // Gender of the user
     @ManyToOne
     @JoinColumn(name = "gender_id")
+    @NonNull
     private Gender gender;
 
     // Sexuality of the user
     @ManyToOne
     @JoinColumn(name = "sexuality_id")
+    @NonNull
     private Sexuality sexuality;
 
     // Location of the user
     @ManyToOne
     @JoinColumn(name = "location_id")
+    @NonNull
     private Location location;
 
     // Religion of the user

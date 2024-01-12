@@ -1,4 +1,4 @@
 package htl.steyr.backend.dto.request;
 
-public record SexualityRequestDto() {
+public record SexualityRequestDto(String name) {
 }

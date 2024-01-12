@@ -19,6 +19,6 @@ public class Like {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "liked_user_id")
     private User likedUser;
 }

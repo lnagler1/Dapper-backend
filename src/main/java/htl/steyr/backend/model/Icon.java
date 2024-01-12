@@ -19,6 +19,7 @@ public class Icon {
     @NonNull
     private String path;
 
-    @OneToOne(mappedBy = "icon")
+    @OneToOne
+    @JoinColumn(name = "interest_id")
     private Interest interest;
 }

@@ -1,4 +1,6 @@
 package htl.steyr.backend.dto.request;
 
-public record CountryRequestDto() {
+public record CountryRequestDto(
+        String name
+) {
 }

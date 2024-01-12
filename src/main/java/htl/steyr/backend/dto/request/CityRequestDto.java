@@ -1,4 +1,6 @@
 package htl.steyr.backend.dto.request;
 
-public record CityRequestDto() {
+public record CityRequestDto(
+        String name
+) {
 }
