@@ -24,6 +24,6 @@ public class Interest {
     @OneToOne(mappedBy = "interest")
     private Icon icon;
 
-    @ManyToMany(mappedBy = "interests")
+    @ManyToMany
     private List<User> users;
 }

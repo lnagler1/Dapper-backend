@@ -98,16 +98,16 @@ public class User {
     private Religion religion;
 
     // List of images of the user
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Image> images;
 
     // Mapped to the user who liked the user
     @OneToMany(mappedBy = "user")
-    private List<Like> likes;
+    private List<LikeUser> likes;
 
     // Mapped to the user who got liked
     @OneToMany(mappedBy = "likedUser")
-    private List<Like> liked;
+    private List<LikeUser> liked;
 
     // Mapped to the user who matched the user
     @OneToMany(mappedBy = "user")
@@ -118,6 +118,6 @@ public class User {
     private List<Match> matched;
 
     // List of the interests of the user
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany
     private List<Interest> interests;
 }

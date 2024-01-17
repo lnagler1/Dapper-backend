@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "match")
+@Table(name = "matchUser")
 @Getter
 @Setter
 public class Match {
@@ -19,6 +19,6 @@ public class Match {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "match_user_id")
     private User matchedUser;
 }
