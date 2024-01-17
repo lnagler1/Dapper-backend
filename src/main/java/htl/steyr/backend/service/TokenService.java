@@ -16,14 +16,12 @@ public class TokenService {
         this.userRepository = userRepository;
     }
 
-  //public String generateToken(User u) {
-  //    u.setToken(encoder.encode(u.getEmail()));
-  //    u.setTokenLifetime(System.currentTimeMillis() + 60 * 10 * 5000);
-
-  //    userRepository.save(u);
-
-  //    return u.getToken();
-  //}
+    public String generateToken(User u) {
+        u.setToken(encoder.encode(u.getEmail()));
+        u.setTokenLifetime(System.currentTimeMillis() + 60 * 10 * 5000);
+        userRepository.save(u);
+        return u.getToken();
+    }
 
     public String generatePassword(String password) {
         return encoder.encode(password);

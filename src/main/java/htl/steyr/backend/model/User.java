@@ -69,6 +69,12 @@ public class User {
     @Column
     private int dapCoin;
 
+    @Column
+    private String token;
+
+    @Column
+    private long tokenLifetime;
+
     // LookingFor ( the things the user is looking for in a Relationship ) of the user
     @ManyToOne
     @JoinColumn(name = "looking_for_id")
@@ -83,13 +89,11 @@ public class User {
     // Sexuality of the user
     @ManyToOne
     @JoinColumn(name = "sexuality_id")
-    @NonNull
     private Sexuality sexuality;
 
     // Location of the user
     @ManyToOne
     @JoinColumn(name = "location_id")
-    @NonNull
     private Location location;
 
     // Religion of the user

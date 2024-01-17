@@ -16,7 +16,7 @@ public class Gender {
     private Long id;
 
     private String name;
-    private boolean normal;
+    private boolean isBinary;
 
     @OneToMany(mappedBy = "gender")
     private List<User> users;

@@ -16,10 +16,6 @@ public record UserSignupRequestDto(
         String username,
         String nickname,
         String snapchat,
-        String instagram,
-        String tiktok,
-        Gender gender,
-        Sexuality sexuality,
-        Location location
+        GenderRequestDto gender
 ) {
 }
