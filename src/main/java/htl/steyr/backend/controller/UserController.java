@@ -1,6 +1,7 @@
 package htl.steyr.backend.controller;
 
-import htl.steyr.backend.dto.request.UserSignupRequestDto;
+import htl.steyr.backend.dto.request.*;
+import htl.steyr.backend.dto.response.UserProfileResponseDto;
 import htl.steyr.backend.service.UserService;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,72 @@ public class UserController {
            return new ResponseEntity<>(token, HttpStatus.OK);
        } catch (Exception e) {
            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+       }
+   }
+
+   @PostMapping("/signin")
+   public ResponseEntity<String> signin(@RequestBody UserSigninRequestDto user) {
+       try {
+           String token = userService.authenticate(user);
+
+           return new ResponseEntity<>(token, HttpStatus.OK);
+       } catch (Exception e) {
+           return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+       }
+   }
+
+   @PostMapping("/signout")
+   public ResponseEntity<String> signout() {
+       try {
+           userService.signout();
+
+           return new ResponseEntity<>("", HttpStatus.OK);
+       } catch (Exception e) {
+           return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+       }
+   }
+
+   @PutMapping("/bio/update")
+   public ResponseEntity<String> changeBio(@RequestBody UserBioRequestDto bio) {
+       try {
+           userService.changeBio(bio);
+
+           return new ResponseEntity<>("", HttpStatus.OK);
+       } catch (Exception e) {
+           return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+       }
+   }
+
+   @PutMapping("/quote/update")
+   public ResponseEntity<String> changeQuote(@RequestBody UserQuoteRequestDto quote) {
+       try {
+           userService.changeQuote(quote);
+
+           return new ResponseEntity<>("", HttpStatus.OK);
+       } catch (Exception e) {
+           return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+       }
+   }
+
+   @PutMapping("/username/update")
+   public ResponseEntity<String> changeUsername(@RequestBody UserUsernameRequestDto username) {
+       try {
+           userService.changeUsername(username);
+
+           return new ResponseEntity<>("", HttpStatus.OK);
+       } catch (Exception e) {
+           return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+       }
+   }
+
+   @GetMapping("/profile")
+   public ResponseEntity<UserProfileResponseDto> getProfile() {
+       try {
+           UserProfileResponseDto profile = userService.getProfile();
+
+           return new ResponseEntity<>(profile, HttpStatus.OK);
+       } catch (Exception e) {
+           return new ResponseEntity<>(null, HttpStatus.CONFLICT);
        }
    }
 }

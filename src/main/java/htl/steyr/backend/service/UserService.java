@@ -1,14 +1,19 @@
 package htl.steyr.backend.service;
 
-import htl.steyr.backend.dto.request.GenderRequestDto;
-import htl.steyr.backend.dto.request.UserSignupRequestDto;
-import htl.steyr.backend.model.Gender;
+import htl.steyr.backend.dto.request.*;
+import htl.steyr.backend.dto.response.UserProfileResponseDto;
 import htl.steyr.backend.model.User;
 import htl.steyr.backend.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -41,13 +46,115 @@ public class UserService {
         );
     }
 
-   public String registerUser(UserSignupRequestDto userDto) {
-       if (userRepository.existsByEmail(userDto.email())) {
-           throw new DuplicateKeyException("Email is already registered");
-       }
-       User user = map(userDto);
-       user.setPassword(passwordEncoder.encode(userDto.password()));
-       userRepository.save(user);
-       return tokenService.generateToken(user);
-   }
+    public String registerUser(UserSignupRequestDto userDto) {
+        if (userRepository.existsByEmail(userDto.email())) {
+            throw new DuplicateKeyException("Email is already registered");
+        }
+        User user = map(userDto);
+        user.setPassword(passwordEncoder.encode(userDto.password()));
+        userRepository.save(user);
+        return tokenService.generateToken(user);
+    }
+
+    public String authenticate(UserSigninRequestDto userDto) {
+        String token = null;
+        Optional<User> result = userRepository.findUserByEmail(userDto.email());
+
+        if (result.isPresent()) {
+            User u = result.get();
+            if (passwordEncoder.matches(userDto.password(), u.getPassword())) {
+                token = tokenService.generateToken(u);
+            }
+        }
+        return token;
+    }
+
+    public String getBearerToken() {
+        HttpServletRequest request =
+                ((ServletRequestAttributes) Objects
+                        .requireNonNull(
+                                RequestContextHolder
+                                        .getRequestAttributes(
+                                        )
+                        )
+                ).getRequest();
+
+        if (request.getHeader("Authorization") != null) {
+            return request.getHeader("Authorization").replace("Bearer ", "");
+        }
+
+        return null;
+    }
+
+    public User isTokenValid(String token, String role) {
+        Optional<User> result =
+                userRepository
+                        .findUserByTokenAndTokenLifetimeIsGreaterThanAndRole(
+                                token,
+                                System.currentTimeMillis(),
+                                role
+                        );
+
+        return result.orElse(null);
+    }
+
+    public void extendTokenLifetime(User u) {
+        u.setTokenLifetime(System.currentTimeMillis() + 60 * 1000 * 10);
+        userRepository.save(u);
+    }
+
+    public void signout() {
+        String token = getBearerToken();
+        if (token != null) {
+            Optional<User> result = userRepository.findUserByToken(token);
+            if (result.isPresent()) {
+                User u = result.get();
+                u.setToken(null);
+                u.setTokenLifetime(0);
+                userRepository.save(u);
+            }
+        }
+    }
+
+    public void changeBio(UserBioRequestDto bioDto) {
+        Optional<User> user = userRepository.findUserByToken(getBearerToken());
+        if (user.isPresent()) {
+            User u = user.get();
+            u.setBio(bioDto.bio());
+            userRepository.save(u);
+        }
+    }
+
+    public void changeQuote(UserQuoteRequestDto quoteDto) {
+        Optional<User> user = userRepository.findUserByToken(getBearerToken());
+        if (user.isPresent()) {
+            User u = user.get();
+            u.setQuote(quoteDto.quote());
+            userRepository.save(u);
+        }
+    }
+
+    public void changeUsername(UserUsernameRequestDto usernameDto) {
+        Optional<User> user = userRepository.findUserByToken(getBearerToken());
+        if (user.isPresent()) {
+            User u = user.get();
+            u.setUsername(usernameDto.username());
+            userRepository.save(u);
+        }
+    }
+
+    public UserProfileResponseDto getProfile() {
+Optional<User> user = userRepository.findUserByToken(getBearerToken());
+        UserProfileResponseDto result = null;
+        if (user.isPresent()) {
+            User u = user.get();
+            result = new UserProfileResponseDto(
+                    u.getId(),
+                    u.getUsername(),
+                    u.getEmail(),
+                    u.getAge()
+            );
+        }
+        return result;
+    }
 }
