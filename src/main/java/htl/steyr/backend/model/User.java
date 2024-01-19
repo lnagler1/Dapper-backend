@@ -14,8 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class User {
 
-    public static final String ROLE_USER = "ROLE_USER";
-    public static final String ROLE_ADMIN = "ROLE_ADMIN";
+   // public static final String ROLE_USER = "ROLE_USER";
+   // public static final String ROLE_ADMIN = "ROLE_ADMIN";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,8 +78,8 @@ public class User {
     @Column
     private long tokenLifetime;
 
-    @Column(name = "role")
-    private String role = ROLE_USER;
+  //  @Column(name = "role")
+  //  private String role = ROLE_USER;
 
     // LookingFor ( the things the user is looking for in a Relationship ) of the user
     @ManyToOne
