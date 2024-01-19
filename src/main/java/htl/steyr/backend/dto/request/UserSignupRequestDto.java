@@ -6,7 +6,7 @@ import htl.steyr.backend.model.Sexuality;
 
 import java.util.Date;
 
-public record UserSignupRequestDto(
+public record    UserSignupRequestDto(
         int height,
         String email,
         String password,

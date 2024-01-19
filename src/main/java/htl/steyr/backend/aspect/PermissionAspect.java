@@ -22,7 +22,7 @@ public class PermissionAspect {
         this.userService = userService;
     }
 
-    @Around("@annotation(htl.steyr.ticket.annotation.Permissions)")
+    @Around("@annotation(htl.steyr.backend.annotation.Permissions)")
     public ResponseEntity<?> checkPermissions(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();

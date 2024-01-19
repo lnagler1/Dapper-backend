@@ -78,6 +78,9 @@ public class User {
     @Column
     private long tokenLifetime;
 
+    @Column(name = "role")
+    private String role = ROLE_USER;
+
     // LookingFor ( the things the user is looking for in a Relationship ) of the user
     @ManyToOne
     @JoinColumn(name = "looking_for_id")
