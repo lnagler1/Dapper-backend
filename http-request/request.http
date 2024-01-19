@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "height": 170,
-  "email": "lukasnagler17@gmail.com",
+  "email": "lukasnaagler17@gmail.com",
   "password": "abc",
   "terms": true,
   "birthday": "1990-01-01",
