@@ -1,5 +1,5 @@
 ###
-POST http://localhost:8080/api/v1/user/signup
+POST http://localhost:8080/user/signup
 Content-Type: application/json
 
 {
@@ -13,12 +13,12 @@ Content-Type: application/json
   "nickname": "nick123",
   "snapchat": "snap_user",
   "gender": {
-    "id": 1
+    "id": 85
   }
 }
 
 ###
-POST http://localhost:8080/api/v1/user/signin
+POST http://localhost:8080/user/signin
 Content-Type: application/json
 
 {
@@ -27,4 +27,16 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/api/v1/user/hallo
+GET http://localhost:8080/state/585
+
+###
+GET http://localhost:8080/country/get
+
+###
+GET http://localhost:8080/city/1
+
+###
+GET http://localhost:8080/interest/get
+
+###
+GET http://localhost:8080/genders/get

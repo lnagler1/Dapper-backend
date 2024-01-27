@@ -21,7 +21,8 @@ public class Interest {
     @NonNull
     private String name;
 
-    @OneToOne(mappedBy = "interest")
+    @OneToOne
+    @JoinColumn(name = "icon_id")
     private Icon icon;
 
     @ManyToMany

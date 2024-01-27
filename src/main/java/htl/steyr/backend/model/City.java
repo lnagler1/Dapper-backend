@@ -18,6 +18,10 @@ public class City {
 
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private State state;
+
     @OneToMany(mappedBy = "city")
     private List<Location> locations;
 }

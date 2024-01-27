@@ -1,16 +1,11 @@
-version: '3.8'
-
 services:
-  database:
-    container_name: database_dapper
-    image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password --log_bin_trust_function_creators=1
+  db:
+    image: postgres
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: dapper
-      MYSQL_DATABASE: dapper
-      MYSQL_USER: dapper
-      MYSQL_PASSWORD: dapper
-    ports:
-      - '4306:3306'
+      POSTGRES_PASSWORD: geheimnis
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'	  
+ 

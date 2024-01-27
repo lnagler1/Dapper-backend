@@ -16,7 +16,14 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "iso")
+    private String isoCode;
+
+    @OneToMany(mappedBy = "country")
+    private List<State> states;
 
     @OneToMany(mappedBy = "country")
     private List<Location> locations;

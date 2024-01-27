@@ -144,7 +144,7 @@ public class UserService {
     }
 
     public UserProfileResponseDto getProfile() {
-Optional<User> user = userRepository.findUserByToken(getBearerToken());
+        Optional<User> user = userRepository.findUserByToken(getBearerToken());
         UserProfileResponseDto result = null;
         if (user.isPresent()) {
             User u = user.get();
