@@ -1,4 +1,6 @@
 package htl.steyr.backend.dto.response;
 
-public record LookingForResponseDto() {
+public record LookingForResponseDto(
+        String description
+) {
 }

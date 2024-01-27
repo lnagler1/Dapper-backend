@@ -40,3 +40,9 @@ GET http://localhost:8080/interest/get
 
 ###
 GET http://localhost:8080/genders/get
+
+###
+GET http://localhost:8080/sexuality/get
+
+###
+GET http://localhost:8080/lookingfor/get
