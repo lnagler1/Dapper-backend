@@ -1,5 +1,6 @@
 package htl.steyr.backend.controller;
 
+import htl.steyr.backend.annotation.Permissions;
 import htl.steyr.backend.dto.request.*;
 import htl.steyr.backend.dto.response.UserProfileResponseDto;
 import htl.steyr.backend.service.UserService;
@@ -36,14 +37,13 @@ public class UserController {
 
    @PostMapping("/signin")
    public ResponseEntity<String> signin(@RequestBody UserSigninRequestDto user) {
-       try {
            String token = userService.authenticate(user);
-
-           return new ResponseEntity<>(token, HttpStatus.OK);
-       } catch (Exception e) {
-           return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-       }
-   }
+           if (token != null) {
+               return ResponseEntity.status(HttpStatus.OK).body(token);
+           } else {
+               return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+           }
+    }
 
    @PostMapping("/signout")
    public ResponseEntity<String> signout() {
@@ -90,6 +90,7 @@ public class UserController {
    }
 
    @GetMapping("/profile")
+   @Permissions(guest = false, admin = true, user = true)
    public ResponseEntity<UserProfileResponseDto> getProfile() {
        try {
            UserProfileResponseDto profile = userService.getProfile();

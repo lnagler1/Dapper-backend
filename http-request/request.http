@@ -22,7 +22,7 @@ POST http://localhost:8080/user/signin
 Content-Type: application/json
 
 {
-  "email": "lukasnagler17@gmail.com",
+  "email": "lukasnaagler17@gmail.com",
   "password": "abc"
 }
 
@@ -36,7 +36,7 @@ GET http://localhost:8080/country/get
 GET http://localhost:8080/city/1
 
 ###
-GET http://localhost:8080/interest/get
+GET http://localhost:8080/interests/get
 
 ###
 GET http://localhost:8080/genders/get
@@ -46,3 +46,7 @@ GET http://localhost:8080/sexuality/get
 
 ###
 GET http://localhost:8080/lookingfor/get
+
+###
+GET http://localhost:8080/user/profile
+Authorization: Bearer {{token}}
