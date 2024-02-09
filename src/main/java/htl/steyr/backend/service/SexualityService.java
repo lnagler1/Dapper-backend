@@ -22,6 +22,7 @@ public class SexualityService {
 
         if (in != null) {
             result = new SexualityResponseDto(
+                    in.getId(),
                     in.getName()
             );
         }

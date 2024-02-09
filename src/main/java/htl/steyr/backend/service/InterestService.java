@@ -21,6 +21,7 @@ public class InterestService {
 
         if (in != null) {
             result = new InterestResponseDto(
+                    in.getId(),
                     in.getName(),
                     in.getIcon()
             );

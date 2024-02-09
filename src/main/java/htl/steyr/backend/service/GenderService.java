@@ -26,8 +26,8 @@ public class GenderService {
 
         if (in != null) {
             result = new GenderResponseDto(
-                    in.getName(),
-                    in.isBinary()
+                    in.getId(),
+                    in.getName()
             );
         }
         return result;

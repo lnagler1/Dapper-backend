@@ -21,6 +21,7 @@ public class LookingForService {
 
         if (in != null) {
             result = new LookingForResponseDto(
+                    in.getId(),
                     in.getDescription()
             );
         }
