@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/interests")
+@RequestMapping("/interest")
 public class InterestController {
 
     private InterestService interestService;
@@ -22,6 +22,6 @@ public class InterestController {
 
     @GetMapping("/get")
     public ResponseEntity<List<InterestResponseDto>> getInterest() {
-        return new ResponseEntity<>(interestService.getInterest(), HttpStatus.OK);
+        return new ResponseEntity<>(interestService.getInterests(), HttpStatus.OK);
     }
 }

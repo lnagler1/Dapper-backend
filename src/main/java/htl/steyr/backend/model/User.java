@@ -130,4 +130,21 @@ public class User {
     // List of the interests of the user
     @ManyToMany
     private List<Interest> interests;
+
+    public User(int height, String email, String password, boolean terms, Date birthday, int age, String username, String nickname, String snapchat, Gender gender, Country country, City city, Interest interest, Sexuality sexuality, LookingFor lookingFor) {
+        this.height = height;
+        this.email = email;
+        this.password = password;
+        this.terms = terms;
+        this.birthday = birthday;
+        this.age = age;
+        this.username = username;
+        this.nickname = nickname;
+        this.snapchat = snapchat;
+        this.gender = gender;
+    }
+
+    public User(int height, String email, String password, boolean terms, Date birthday, int age, String username, String nickname, String snapchat, Gender gender, Location map, Interest interest, Sexuality sexuality, LookingFor lookingFor) {
+
+    }
 }

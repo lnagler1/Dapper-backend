@@ -27,4 +27,8 @@ public class Interest {
 
     @ManyToMany
     private List<User> users;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 }

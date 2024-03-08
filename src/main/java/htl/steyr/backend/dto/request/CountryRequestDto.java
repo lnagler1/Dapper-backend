@@ -1,6 +1,6 @@
 package htl.steyr.backend.dto.request;
 
 public record CountryRequestDto(
-        String name
+        Long id
 ) {
 }

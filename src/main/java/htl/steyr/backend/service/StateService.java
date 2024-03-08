@@ -1,5 +1,6 @@
 package htl.steyr.backend.service;
 
+import htl.steyr.backend.dto.request.StateRequestDto;
 import htl.steyr.backend.dto.response.StateResponseDto;
 import htl.steyr.backend.model.State;
 import htl.steyr.backend.repository.StateRepository;
@@ -10,10 +11,14 @@ import java.util.List;
 @Service
 public class StateService {
 
-    private StateRepository stateRepository;
+    private static StateRepository stateRepository;
 
     public StateService(StateRepository stateRepository) {
         this.stateRepository = stateRepository;
+    }
+
+    public static State map(StateRequestDto state) {
+        return stateRepository.findById(state.id()).get();
     }
 
     private static StateResponseDto map(State in) {

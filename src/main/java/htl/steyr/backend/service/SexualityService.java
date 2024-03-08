@@ -17,6 +17,10 @@ public class SexualityService {
         this.sexualityRepository = sexualityRepository;
     }
 
+    public Sexuality mapToSexuality(SexualityRequestDto sexuality) {
+        return sexualityRepository.findById(sexuality.id()).get();
+    }
+
     private static SexualityResponseDto map(Sexuality in) {
         SexualityResponseDto result = null;
 

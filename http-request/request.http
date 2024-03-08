@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "height": 170,
-  "email": "lukasnaagler17@gmail.com",
+  "email": "lukasnaagalaer17@gmail.com",
   "password": "abc",
   "terms": true,
   "birthday": "1990-01-01",
@@ -14,7 +14,32 @@ Content-Type: application/json
   "snapchat": "snap_user",
   "gender": {
     "id": 85
-  }
+  },
+  "location": {
+    "city": {
+        "id": 1
+        },
+    "state": {
+        "id": 1
+        },
+    "country": {
+        "id": 585
+    }
+  },
+  "interests": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    }
+  ],
+  "sexuality": {
+    "id": 1
+  },
+    "lookingFor": {
+        "id": 1
+    }
 }
 
 ###
@@ -50,3 +75,6 @@ GET http://localhost:8080/lookingfor/get
 ###
 GET http://localhost:8080/user/profile
 Authorization: Bearer {{token}}
+
+###
+GET http://localhost:8080/category/get

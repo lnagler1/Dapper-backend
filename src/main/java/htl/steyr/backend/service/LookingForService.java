@@ -1,5 +1,6 @@
 package htl.steyr.backend.service;
 
+import htl.steyr.backend.dto.request.LookingForRequestDto;
 import htl.steyr.backend.dto.response.LookingForResponseDto;
 import htl.steyr.backend.model.LookingFor;
 import htl.steyr.backend.repository.LookingForRepository;
@@ -14,6 +15,10 @@ public class LookingForService {
 
     public LookingForService(LookingForRepository lookingForRepository) {
         this.lookingForRepository = lookingForRepository;
+    }
+
+    public LookingFor mapToLookingFor(LookingForRequestDto lookingFor) {
+        return lookingForRepository.findById(lookingFor.id()).get();
     }
 
     private static LookingForResponseDto map(LookingFor in) {

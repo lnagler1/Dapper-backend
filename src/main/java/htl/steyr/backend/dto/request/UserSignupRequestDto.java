@@ -16,6 +16,11 @@ public record    UserSignupRequestDto(
         String username,
         String nickname,
         String snapchat,
-        GenderRequestDto gender
+        GenderRequestDto gender,
+        LocationRequestDto location,
+        InterestRequestDto interest,
+        SexualityRequestDto sexuality,
+        LookingForRequestDto lookingFor
+
 ) {
 }

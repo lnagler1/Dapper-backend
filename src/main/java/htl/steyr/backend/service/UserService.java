@@ -23,15 +23,25 @@ public class UserService {
     private UserRepository userRepository;
     private TokenService tokenService;
 
-    private static GenderService genderService;
+    private GenderService genderService;
+    private CountryService countryService;
+    private CityService cityService;
+    private InterestService interestService;
+    private SexualityService sexualityService;
+    private LookingForService lookingForService;
 
-    public UserService(UserRepository userRepository, TokenService tokenService, GenderService genderService) {
+    public UserService(UserRepository userRepository, TokenService tokenService, GenderService genderService, CountryService countryService, CityService cityService, InterestService interestService, SexualityService sexualityService, LookingForService lookingForService) {
         this.userRepository = userRepository;
         this.tokenService = tokenService;
         this.genderService = genderService;
+        this.countryService = countryService;
+        this.cityService = cityService;
+        this.interestService = interestService;
+        this.sexualityService = sexualityService;
+        this.lookingForService = lookingForService;
     }
 
-    public static User map(UserSignupRequestDto in) {
+    public User map(UserSignupRequestDto in) {
         return new User(
                 in.height(),
                 in.email(),
@@ -42,7 +52,11 @@ public class UserService {
                 in.username(),
                 in.nickname(),
                 in.snapchat(),
-                genderService.mapToGender(in.gender())
+                genderService.mapToGender(in.gender()),
+                LocationService.map(in.location()),
+                interestService.mapToInterest(in.interest()),
+                sexualityService.mapToSexuality(in.sexuality()),
+                lookingForService.mapToLookingFor(in.lookingFor())
         );
     }
 
@@ -50,6 +64,7 @@ public class UserService {
         if (userRepository.existsByEmail(userDto.email())) {
             throw new DuplicateKeyException("Email is already registered");
         }
+
         User user = map(userDto);
         user.setPassword(passwordEncoder.encode(userDto.password()));
         userRepository.save(user);

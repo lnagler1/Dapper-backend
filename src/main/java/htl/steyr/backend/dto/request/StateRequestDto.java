@@ -1,6 +1,6 @@
 package htl.steyr.backend.dto.request;
 
 public record StateRequestDto(
-        String name
+        Long id
 ) {
 }

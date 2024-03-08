@@ -1,8 +1,7 @@
 package htl.steyr.backend.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -10,6 +9,8 @@ import java.util.List;
 @Table(name = "location")
 @Getter
 @Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class Location {
 
     @Id
@@ -18,6 +19,7 @@ public class Location {
 
     @ManyToOne
     @JoinColumn(name = "city_id")
+    @NonNull
     private City city;
 
     @ManyToOne

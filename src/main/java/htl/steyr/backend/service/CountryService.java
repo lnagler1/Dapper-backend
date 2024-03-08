@@ -1,5 +1,6 @@
 package htl.steyr.backend.service;
 
+import htl.steyr.backend.dto.request.CountryRequestDto;
 import htl.steyr.backend.dto.response.CountryResponseDto;
 import htl.steyr.backend.model.Country;
 import htl.steyr.backend.repository.CountryRepository;
@@ -10,10 +11,14 @@ import java.util.List;
 @Service
 public class CountryService {
 
-    private CountryRepository countryRepository;
+    private static CountryRepository countryRepository;
 
     public CountryService(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
+    }
+
+    public static Country map(CountryRequestDto country) {
+        return countryRepository.findById(country.id()).get();
     }
 
     private static CountryResponseDto map(Country in) {
