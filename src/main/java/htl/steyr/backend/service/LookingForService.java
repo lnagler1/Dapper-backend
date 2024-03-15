@@ -11,13 +11,13 @@ import java.util.List;
 @Service
 public class LookingForService {
 
-    private LookingForRepository lookingForRepository;
+    private static LookingForRepository lookingForRepository;
 
     public LookingForService(LookingForRepository lookingForRepository) {
         this.lookingForRepository = lookingForRepository;
     }
 
-    public LookingFor mapToLookingFor(LookingForRequestDto lookingFor) {
+    public static LookingFor map(LookingForRequestDto lookingFor) {
         return lookingForRepository.findById(lookingFor.id()).get();
     }
 

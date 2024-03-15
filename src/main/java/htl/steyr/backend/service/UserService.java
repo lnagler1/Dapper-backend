@@ -43,7 +43,6 @@ public class UserService {
 
     public User map(UserSignupRequestDto in) {
         return new User(
-                in.height(),
                 in.email(),
                 in.password(),
                 in.terms(),
@@ -52,11 +51,11 @@ public class UserService {
                 in.username(),
                 in.nickname(),
                 in.snapchat(),
+                LookingForService.map(in.lookingFor()),
                 genderService.mapToGender(in.gender()),
-                LocationService.map(in.location()),
-                interestService.mapToInterest(in.interest()),
                 sexualityService.mapToSexuality(in.sexuality()),
-                lookingForService.mapToLookingFor(in.lookingFor())
+                LocationService.map(in.location()),
+                in.interest().stream().map(InterestService::map).toList()
         );
     }
 
@@ -67,7 +66,7 @@ public class UserService {
 
         User user = map(userDto);
         user.setPassword(passwordEncoder.encode(userDto.password()));
-        userRepository.save(user);
+
         return tokenService.generateToken(user);
     }
 

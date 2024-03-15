@@ -1,7 +1,6 @@
 package htl.steyr.backend.service;
 
 import htl.steyr.backend.dto.request.InterestRequestDto;
-import htl.steyr.backend.dto.response.CategoryResponseDto;
 import htl.steyr.backend.dto.response.InterestResponseDto;
 import htl.steyr.backend.model.Interest;
 import htl.steyr.backend.repository.InterestRepository;
@@ -12,14 +11,14 @@ import java.util.List;
 @Service
 public class InterestService {
 
-    private InterestRepository interestRepository;
+    private static InterestRepository interestRepository;
 
     public InterestService(InterestRepository interestRepository) {
         this.interestRepository = interestRepository;
     }
 
-    public Interest mapToInterest(InterestRequestDto interest) {
-        return interestRepository.findById(interest.id()).get();
+    public static Interest map(InterestRequestDto in) {
+        return interestRepository.findById(in.id()).get();
     }
 
     private static InterestResponseDto map(Interest in) {

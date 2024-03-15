@@ -26,6 +26,7 @@ public class LocationService {
             result.setCity(CityService.map(location.city()));
             result.setState(StateService.map(location.state()));
             result.setCountry(CountryService.map(location.country()));
+            locationRepository.save(result);
             return result;
         }
     }

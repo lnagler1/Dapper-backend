@@ -20,6 +20,7 @@ public class TokenService {
         u.setToken(encoder.encode(u.getEmail()));
         u.setTokenLifetime(System.currentTimeMillis() + 60 * 10 * 5000);
         userRepository.save(u);
+
         return u.getToken();
     }
 

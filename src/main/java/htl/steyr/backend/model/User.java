@@ -22,7 +22,6 @@ public class User {
     private Long id;
 
     @Column
-    @NonNull
     private int height;
 
     @Column
@@ -84,6 +83,7 @@ public class User {
     // LookingFor ( the things the user is looking for in a Relationship ) of the user
     @ManyToOne
     @JoinColumn(name = "looking_for_id")
+    @NonNull
     private LookingFor lookingFor;
 
     // Gender of the user
@@ -95,11 +95,13 @@ public class User {
     // Sexuality of the user
     @ManyToOne
     @JoinColumn(name = "sexuality_id")
+    @NonNull
     private Sexuality sexuality;
 
     // Location of the user
     @ManyToOne
     @JoinColumn(name = "location_id")
+    @NonNull
     private Location location;
 
     // Religion of the user
@@ -129,22 +131,6 @@ public class User {
 
     // List of the interests of the user
     @ManyToMany
+    @NonNull
     private List<Interest> interests;
-
-    public User(int height, String email, String password, boolean terms, Date birthday, int age, String username, String nickname, String snapchat, Gender gender, Country country, City city, Interest interest, Sexuality sexuality, LookingFor lookingFor) {
-        this.height = height;
-        this.email = email;
-        this.password = password;
-        this.terms = terms;
-        this.birthday = birthday;
-        this.age = age;
-        this.username = username;
-        this.nickname = nickname;
-        this.snapchat = snapchat;
-        this.gender = gender;
-    }
-
-    public User(int height, String email, String password, boolean terms, Date birthday, int age, String username, String nickname, String snapchat, Gender gender, Location map, Interest interest, Sexuality sexuality, LookingFor lookingFor) {
-
-    }
 }

@@ -5,9 +5,9 @@ import htl.steyr.backend.model.Location;
 import htl.steyr.backend.model.Sexuality;
 
 import java.util.Date;
+import java.util.List;
 
 public record    UserSignupRequestDto(
-        int height,
         String email,
         String password,
         boolean terms,
@@ -18,7 +18,7 @@ public record    UserSignupRequestDto(
         String snapchat,
         GenderRequestDto gender,
         LocationRequestDto location,
-        InterestRequestDto interest,
+        List<InterestRequestDto> interest,
         SexualityRequestDto sexuality,
         LookingForRequestDto lookingFor
 

@@ -27,9 +27,8 @@ public class UserController {
     @PostMapping("/signup")
    public ResponseEntity<String> signup(@RequestBody UserSignupRequestDto user){
        try {
-           String token = userService.registerUser(user);
 
-           return new ResponseEntity<>(token, HttpStatus.OK);
+           return new ResponseEntity<>(userService.registerUser(user), HttpStatus.OK);
        } catch (Exception e) {
            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
        }
